@@ -1,12 +1,18 @@
 {
   "users": [
     {
-  
-      "User_Name": "Md Zeeshan",
-      "User_Email": "mdzee3242@gmail.com",
-      "User_Contact": "9498383493",
-      "Password": 1234321
+      "username": "Nitesh singh",
+      "email": "nitesh_kumar@gmail.com",
+      "phone": "88332201010",
+      "password": "zsdjfnasjfnas",
+      "id": 1
+    },
+    {
+      "username": "Shivam Lahoria",
+      "email": "nshiva87m_kumar@gmail.com",
+      "phone": "88332202020",
+      "password": "zsdjfnasjfnas",
+      "id": 2
     }
-  
   ]
 }

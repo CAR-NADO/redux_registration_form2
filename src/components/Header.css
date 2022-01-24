@@ -45,6 +45,12 @@ h3, h2 {
   }
   .form_header {
     margin-left: 70px;
+    display: flex;
+    align-items: center;
+
+  }
+  .form_header span{
+    margin-left: 20px;
   }
   .form_name {
     margin-left: 30px;
