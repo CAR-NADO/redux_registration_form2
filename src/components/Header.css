@@ -174,3 +174,7 @@ h3, h2 {
     font-size: 13px;
     font-family: cursive;
   }
+  .error {
+    font-size: 13px;
+    color: rgb(251, 30, 30);
+  }

@@ -5,12 +5,11 @@ import axios from 'axios';
 const Header = () => {
   const [userList, setUserList] = useState([])
   const [renderData, setRenderData] = useState(false)
+  const [error, setError] = useState("");
+  const [errorE, setErrorE] = useState("");
+  const [errorN, setErrorN] = useState("");
+  const [errorP, setErrorP] = useState("");
 
-  // let apiCall = async () => {
-  //   let result = await axios.get("http://localhost:8000/users");
-  //   setUserList(result.data)
-  // }
-  // apiCall()
 
   useEffect(() => {
     let apiCall = async () => {
@@ -27,7 +26,7 @@ const Header = () => {
     number: "",
     password: ""
   });
-  const { username, number } = userRegistration
+  const { username, number, password, email } = userRegistration
   const handleInput = (e) => {
     const name = e.target.name;
     const value = e.target.value;
@@ -38,13 +37,44 @@ const Header = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     //validation call
-    if (username.length <= 3 || username.length >=16) {
-      console.log("Username should be between 3 to 16 character ");
+    if (username.length === 0){
+      // console.log("Please enter the username");
+      setError("Please enter the username")
+    }
+    
+    else if (username.length <= 3 || username.length >=16) {
+      setError("")
+      setError("Username should be 3 to 16 characters")
+    }
+    else if (email.length === 0){
+      setError("")
+      setErrorE("Please enter your email")
+      // console.log("Please enter the Email");
+    }
+    else if (number.length === 0){
+      setErrorE("")
+      
+      setErrorN("Please enter your mobile number")
+      // console.log("Please enter the Number");
     }
     else if (number.length != 10 ){
-      console.log("Number should be in 10 digit");
+      setErrorN("")
+      setErrorN("Number should be 10 digit")
+      // console.log("Number should be in 10 digit");
     }
+    else if (password.length === 0){
+      setErrorN("")
+      setErrorP("Please enter the password")
+      // console.log("Please enter the Password");
+    }
+    else if (password.length <=4 || password.length >=12 ){
+      setErrorP("")
+      setErrorP("Password should be 4 to 12 characters")
+        // console.log("Password should be 4 to 12 characters");
+    }
+
       else {
+        setErrorP("")
         try {
           let result = await axios({
             method: "post",
@@ -53,6 +83,9 @@ const Header = () => {
           })
           console.log("Post API result response", result)
           setRenderData(true)
+          setUserRegistration({
+            username:"", email:"", number:"", password:""
+          })
         }
         catch (error) {
           console.log("Something is Wrong");
@@ -84,6 +117,7 @@ const Header = () => {
               value={userRegistration.username}
               onChange={handleInput}
               id='a' />
+              <p className='error'>{error}</p>
           </div>
 
           <div className="email">
@@ -95,6 +129,7 @@ const Header = () => {
               required
               value={userRegistration.email}
               onChange={handleInput} />
+              <p className='error'>{errorE}</p>
           </div>
 
           <div className="mobile_number">
@@ -106,6 +141,7 @@ const Header = () => {
               required
               value={userRegistration.number}
               onChange={handleInput} />
+              <p className='error'>{errorN}</p>
           </div>
 
           <div className="password">
@@ -117,6 +153,7 @@ const Header = () => {
               required
               value={userRegistration.password}
               onChange={handleInput} />
+              <p className='error'>{errorP}</p>
           </div>
 
           <div className="button">
